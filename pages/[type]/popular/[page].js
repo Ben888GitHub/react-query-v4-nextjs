@@ -56,16 +56,16 @@ function Popular({ type, page }) {
 				</button>
 
 				<button
-				// disabled={Number(page) === 40}
-				// onClick={() =>
-				// 	router.push({
-				// 		pathname: `/[type]/popular/[page]`,
-				// 		query: {
-				// 			type,
-				// 			page: page + 1
-				// 		}
-				// 	})
-				// }
+					disabled={Number(page) === 40}
+					// onClick={() =>
+					// 	router.push({
+					// 		pathname: `/[type]/popular/[page]`,
+					// 		query: {
+					// 			type,
+					// 			page: page + 1
+					// 		}
+					// 	})
+					// }
 				>
 					<Link
 						href={{
