@@ -29,56 +29,42 @@ function Popular({ type, page }) {
 				<h1>{`Popular ${filmType}`}</h1>
 				<br />
 
-				<button
-					disabled={Number(page) === 1}
-					// onClick={() => {
-					// 	router.push({
-					// 		pathname: `/[type]/popular/[page]`,
-					// 		query: {
-					// 			type,
-					// 			page: page - 1
-					// 		}
-					// 	});
-					// }}
-				>
-					<Link
-						href={{
-							pathname: `/[type]/popular/[page]`,
-							query: {
-								type,
-								page: Number(page) - 1
-							}
-						}}
-						passHref
-					>
-						Prev
-					</Link>
+				<button disabled={Number(page) === 1}>
+					{Number(page) > 1 ? (
+						<Link
+							href={{
+								pathname: `/[type]/popular/[page]`,
+								query: {
+									type,
+									page: Number(page) - 1
+								}
+							}}
+							passHref
+						>
+							Prev
+						</Link>
+					) : (
+						'Prev'
+					)}
 				</button>
 
-				<button
-					disabled={Number(page) === 40}
-					// onClick={() =>
-					// 	router.push({
-					// 		pathname: `/[type]/popular/[page]`,
-					// 		query: {
-					// 			type,
-					// 			page: page + 1
-					// 		}
-					// 	})
-					// }
-				>
-					<Link
-						href={{
-							pathname: `/[type]/popular/[page]`,
-							query: {
-								type,
-								page: Number(page) + 1
-							}
-						}}
-						passHref
-					>
-						Next
-					</Link>
+				<button disabled={Number(page) === 40}>
+					{Number(page) < 40 ? (
+						<Link
+							href={{
+								pathname: `/[type]/popular/[page]`,
+								query: {
+									type,
+									page: Number(page) + 1
+								}
+							}}
+							passHref
+						>
+							Next
+						</Link>
+					) : (
+						'Next'
+					)}
 				</button>
 				<br />
 				{data?.results?.map((film, idx) => (
