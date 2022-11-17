@@ -9,8 +9,8 @@ function Popular({ type, page }) {
 	const filmType = type === 'tv' ? 'TV Shows' : 'Movies';
 
 	const { data } = useQuery({
-		queryKey: ['films'],
-		queryFn: () => fetchFilm(filmType, page),
+		queryKey: ['films', type, page],
+		queryFn: fetchFilm,
 		keepPreviousData: true
 	});
 
@@ -80,7 +80,7 @@ export const getStaticProps = async ({ params }) => {
 	const queryClient = new QueryClient();
 	const { type, page } = params;
 
-	await queryClient.prefetchQuery(['films'], () => fetchFilm(type, page));
+	await queryClient.prefetchQuery(['films', type, page], fetchFilm);
 
 	// console.log(type, page);
 
