@@ -24,10 +24,10 @@ export default function Home() {
 			<main className={styles.main}>
 				<h1>React Query Utilizations with NextJS</h1>
 				<br />
-				<Link href={`/movie/popular/${1}`}>
+				<Link href={`/movie/popular/${1}`} passHref>
 					<h1 style={{ cursor: 'pointer' }}>Popular movie</h1>
 				</Link>
-				<Link href={`/tv/popular/${1}`}>
+				<Link href={`/tv/popular/${1}`} passHref>
 					<h1 style={{ cursor: 'pointer' }}>Popular TV</h1>
 				</Link>
 			</main>
