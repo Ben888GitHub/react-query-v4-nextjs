@@ -1,5 +1,6 @@
 import { useQuery, dehydrate, QueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import { fetchFilm } from '../../../api';
@@ -27,33 +28,57 @@ function Popular({ type, page }) {
 			<div style={{ margin: 20, textAlign: 'center' }}>
 				<h1>{`Popular ${filmType}`}</h1>
 				<br />
+
 				<button
 					disabled={Number(page) === 1}
-					onClick={() => {
-						router.push({
+					// onClick={() => {
+					// 	router.push({
+					// 		pathname: `/[type]/popular/[page]`,
+					// 		query: {
+					// 			type,
+					// 			page: page - 1
+					// 		}
+					// 	});
+					// }}
+				>
+					<Link
+						href={{
 							pathname: `/[type]/popular/[page]`,
 							query: {
 								type,
-								page: Number(router.query.page) - 1
+								page: Number(page) - 1
 							}
-						});
-					}}
-				>
-					Prev
+						}}
+						passHref
+					>
+						Prev
+					</Link>
 				</button>
+
 				<button
-					disabled={Number(page) === 40}
-					onClick={() =>
-						router.push({
+				// disabled={Number(page) === 40}
+				// onClick={() =>
+				// 	router.push({
+				// 		pathname: `/[type]/popular/[page]`,
+				// 		query: {
+				// 			type,
+				// 			page: page + 1
+				// 		}
+				// 	})
+				// }
+				>
+					<Link
+						href={{
 							pathname: `/[type]/popular/[page]`,
 							query: {
 								type,
-								page: Number(router.query.page) + 1
+								page: Number(page) + 1
 							}
-						})
-					}
-				>
-					Next
+						}}
+						passHref
+					>
+						Next
+					</Link>
 				</button>
 				<br />
 				{data?.results?.map((film, idx) => (
