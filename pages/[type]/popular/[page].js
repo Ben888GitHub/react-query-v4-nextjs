@@ -29,16 +29,15 @@ function Popular({ type, page }) {
 export default Popular;
 
 export const getStaticProps = async ({ params }) => {
+	const queryClient = new QueryClient();
 	const { type, page } = params;
 
-	const queryClient = new QueryClient();
+	await queryClient.prefetchQuery(
+		['films', params.type, params.page],
+		fetchFilm
+	);
 
-	await queryClient.prefetchQuery({
-		queryKey: ['films', type, page],
-		queryFn: fetchFilm
-	});
-
-	console.log(type, page);
+	// console.log(type, page);
 
 	return {
 		props: {
