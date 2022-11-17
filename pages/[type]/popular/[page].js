@@ -6,17 +6,13 @@ import { Fragment } from 'react';
 import { fetchFilm } from '../../../api';
 
 function Popular({ type, page }) {
-	const router = useRouter();
 	const filmType = type === 'tv' ? 'TV Shows' : 'Movies';
 
 	const { data } = useQuery({
-		queryKey: ['films', type, page],
-		queryFn: fetchFilm,
+		queryKey: ['films'],
+		queryFn: () => fetchFilm(filmType, page),
 		keepPreviousData: true
 	});
-
-	console.log(data);
-	console.log(router.query);
 
 	return (
 		<>
@@ -84,7 +80,7 @@ export const getStaticProps = async ({ params }) => {
 	const queryClient = new QueryClient();
 	const { type, page } = params;
 
-	await queryClient.prefetchQuery(['films', type, page], fetchFilm);
+	await queryClient.prefetchQuery(['films'], () => fetchFilm(type, page));
 
 	// console.log(type, page);
 
