@@ -16,7 +16,17 @@ import { useState } from 'react';
 // });
 
 function MyApp({ Component, pageProps }) {
-	const [queryClient] = useState(() => new QueryClient());
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						refetchOnWindowFocus: false,
+						refetchOnMount: false
+					}
+				}
+			})
+	);
 
 	return (
 		<QueryClientProvider client={queryClient}>

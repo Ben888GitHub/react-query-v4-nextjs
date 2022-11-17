@@ -8,9 +8,7 @@ function Popular({ type, page }) {
 	const { data } = useQuery({
 		queryKey: ['films', type, page],
 		queryFn: fetchFilm,
-		keepPreviousData: true,
-		refetchOnWindowFocus: false,
-		refetchOnMount: false
+		keepPreviousData: true
 	});
 
 	// data && console.log(data);
