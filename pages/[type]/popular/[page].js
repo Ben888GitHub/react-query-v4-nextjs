@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, dehydrate, QueryClient } from '@tanstack/react-query';
 import { Fragment } from 'react';
 import { fetchFilm } from '../../../api';
 
@@ -31,12 +31,20 @@ export default Popular;
 export const getStaticProps = async ({ params }) => {
 	const { type, page } = params;
 
+	const queryClient = new QueryClient();
+
+	await queryClient.prefetchQuery({
+		queryKey: ['films', type, page],
+		queryFn: fetchFilm
+	});
+
 	console.log(type, page);
 
 	return {
 		props: {
 			type,
-			page
+			page,
+			dehydratedState: dehydrate(queryClient)
 		}
 	};
 };
