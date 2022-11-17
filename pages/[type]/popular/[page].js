@@ -32,10 +32,7 @@ export const getStaticProps = async ({ params }) => {
 	const queryClient = new QueryClient();
 	const { type, page } = params;
 
-	await queryClient.prefetchQuery(
-		['films', params.type, params.page],
-		fetchFilm
-	);
+	await queryClient.prefetchQuery(['films', 'tv', 1], fetchFilm);
 
 	// console.log(type, page);
 
